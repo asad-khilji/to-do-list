@@ -1,270 +1,454 @@
-# To-Do List Application
+# Task Management System
+
+A modern, responsive web-based Task Management System built using **HTML, CSS, PHP, and MySQL**. The application enables teams to efficiently create, assign, manage, and track tasks while providing role-based access control, email notifications, reminders, file attachments, and calendar integration.
+
+---
 
 ## Overview
-This project is a PHP/MySQL task management application that allows users to create, edit, track, and delete tasks through a web interface. The application includes task filtering, priorities, due dates, file attachments, and optional email notifications when task status changes.
+
+The Task Management System is designed to help small teams organize and manage daily work efficiently. Users can create tasks, assign them to team members, monitor progress, upload attachments, receive email notifications, and view tasks in both card and calendar layouts.
+
+The application supports three user roles:
+
+- **Administrator** – Full access to the system
+- **Manager** – Can view and manage all tasks
+- **Standard User** – Can manage only their assigned tasks
 
 ---
 
-# 1. Requirements
+# Features
 
-## Software
-- PHP 8.0+
-- MySQL / MariaDB
-- Apache Web Server (Bluehost compatible)
-- Web Browser
-- Bluehost Shared Hosting or VPS
+## User Authentication
 
-## Database
-Import the provided SQL file:
-
-`zjdlpcmy_life_admin.sql`
-
-## Project Files
-- index.php
-- add.php
-- edit.php
-- delete.php
-- db.php
-- style.css
-- uploads/ (created automatically)
+- Secure login system
+- Password hashing
+- Session management
+- Role-based authorization
+- Logout functionality
 
 ---
 
-# 2. Functional Specifications
+## Dashboard
 
-The application provides:
+- Total Tasks
+- To Do Tasks
+- In Progress Tasks
+- Waiting Tasks
+- Completed Tasks
+- Search bar
+- Status navigation
+- Responsive task cards
+
+---
+
+## Task Management
+
+Users can:
+
+- Create tasks
+- Edit tasks
+- Delete tasks
+- View task details
+- Click anywhere on a task card to open it
+- Search tasks
+- Filter tasks by status
+- Attach multiple files
+- Assign tasks
+- Set due dates
+- Set priorities
+- Add descriptions
+- Categorize tasks
+
+---
+
+## Task Status
+
+The system supports four task statuses:
+
+- To Do
+- In Progress
+- Waiting
+- Done
+
+---
+
+## Priorities
+
+- Low
+- Medium
+- High
+- Urgent
+
+---
+
+## Email Notifications
+
+Email notifications are automatically sent when:
+
+- A task is created
+- A task is updated
+
+The creator can select which users receive notifications.
+
+---
+
+## Calendar
+
+Calendar view allows users to:
+
+- View upcoming tasks
+- View overdue tasks
+- View daily tasks
+- View monthly tasks
+
+---
+
+## File Attachments
+
+Supports uploading multiple files including:
+
+- PDF
+- Excel
+- Word
+- Images
+
+Users can:
+
+- Upload
+- Download
+- View existing attachments
+
+---
+
+## Reminder System
+
+Task reminders include:
+
+- Upcoming due dates
+- Overdue tasks
+
+---
+
+## Search
+
+Users can search tasks by:
+
+- Title
+- Description
+- Category
+- Status
+
+---
+
+## Responsive Design
+
+Fully responsive for:
+
+- Desktop
+- Tablet
+- Mobile
+
+---
+
+# User Roles
+
+## Administrator
+
+Administrator permissions include:
+
+- Full access
+- Manage users
+- Create users
+- Delete users
+- Reset passwords
+- View all tasks
+- Edit all tasks
+- Delete all tasks
+- Assign tasks
+
+---
+
+## Manager
+
+Manager permissions include:
 
 - View all tasks
-- Filter tasks by status
-- Add new tasks
-- Edit existing tasks
+- Create tasks
+- Assign tasks
+- Edit tasks
 - Delete tasks
-- Assign category
-- Assign priority
-- Set due dates
-- Upload multiple attachments
-- Email notifications when task status changes
-- Dashboard statistics:
-  - Total Tasks
-  - Urgent Tasks
-  - Waiting Tasks
-  - Completed Tasks
 
 ---
 
-# 3. Design
+## Standard User
 
-## Architecture
+Standard users can:
 
-Presentation Layer
-- HTML
-- CSS
+- View assigned tasks
+- Create tasks
+- Edit their own tasks
+- Upload attachments
+- Receive notifications
 
-Business Logic
+---
+
+# Technology Stack
+
+Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+
+Backend
+
 - PHP
 
-Data Layer
-- MySQL using PDO
+Database
 
-## Database
+- MySQL
 
-Primary table:
+Development Tools
 
-tasks
-
-Typical fields include:
-- id
-- title
-- description
-- category
-- priority
-- status
-- due_date
-- attachment
-- created_at
+- phpMyAdmin
+- Bluehost File Manager
 
 ---
 
-# 4. Implementation
+# Database
 
-## Main Files
+## Users Table
 
-### index.php
-Displays dashboard, statistics, filtering, and task list.
-
-### add.php
-Creates new tasks.
-
-### edit.php
-Updates tasks, uploads attachments, and sends email notifications.
-
-### delete.php
-Deletes selected tasks.
-
-### db.php
-Creates PDO database connection.
-
-### style.css
-Provides application styling.
-
-## Security Recommendations
-
-Current project works but should be improved by:
-
-- Move database credentials outside web root.
-- Store credentials in environment variables.
-- Validate uploaded file types.
-- Limit upload size.
-- Add login/authentication.
-- Add CSRF protection.
-- Improve email sender configuration.
-- Sanitize uploaded filenames and scan uploads if possible.
+| Column | Description |
+|----------|-------------|
+| id | Primary Key |
+| username | Username |
+| password | Hashed Password |
+| role | Admin, Manager, User |
 
 ---
 
-# 5. Testing
+## Tasks Table
 
-## Functional Tests
-
-✓ Create task
-
-✓ Edit task
-
-✓ Delete task
-
-✓ Filter by status
-
-✓ Upload attachments
-
-✓ Send notification emails
-
-✓ Dashboard statistics update
-
-## Database Tests
-
-- Verify records are inserted
-- Verify updates persist
-- Verify deletes remove records
-
-## Browser Testing
-
-Test on:
-- Chrome
-- Edge
-- Firefox
-- Safari
+| Column | Description |
+|----------|-------------|
+| id | Primary Key |
+| title | Task title |
+| description | Task description |
+| category | Task category |
+| priority | Task priority |
+| status | Task status |
+| due_date | Due date |
+| created_at | Date created |
+| attachment | File attachment |
+| assign_name | Assigned user |
+| assigned_email | Assigned email |
+| user_role | Assigned role |
 
 ---
 
-# 6. Deployment on Bluehost File Manager
+# Security
 
-## Step 1
+The application follows security best practices:
 
-Login to Bluehost.
-
-## Step 2
-
-Open:
-
-Hosting → File Manager
-
-## Step 3
-
-Navigate to:
-
-public_html/
-
-(or desired subfolder)
-
-## Step 4
-
-Upload the project files.
-
-## Step 5
-
-Create a MySQL database from Bluehost cPanel.
-
-## Step 6
-
-Import:
-
-zjdlpcmy_life_admin.sql
-
-using phpMyAdmin.
-
-## Step 7
-
-Update db.php:
-
-- Host
-- Database name
-- Username
-- Password
-
-using your Bluehost database credentials.
-
-## Step 8
-
-Ensure PHP has:
-- PDO
-- PDO MySQL
-- File Uploads enabled
-
-## Step 9
-
-Give the uploads folder write permission (755 or 775).
-
-## Step 10
-
-Visit:
-
-https://yourdomain.com/to-do/
+- Password hashing
+- Prepared SQL statements
+- Input sanitization using `htmlspecialchars()`
+- Environment variables for credentials
+- Secure session handling
+- `.htaccess` protection
 
 ---
 
-# 7. Maintenance
+# Project Structure
 
-Routine maintenance should include:
+```
+project/
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── uploads/
+│
+├── includes/
+│   ├── db.php
+│   ├── auth.php
+│   ├── functions.php
+│
+├── pages/
+│   ├── dashboard.php
+│   ├── add-task.php
+│   ├── edit-task.php
+│   ├── login.php
+│   └── calendar.php
+│
+├── config/
+│   ├── .env
+│   └── config.php
+│
+├── index.php
+├── logout.php
+└── .htaccess
+```
 
-- Database backups
-- Application backups
-- PHP updates
-- MySQL updates
-- Security patches
-- Monitor upload directory
-- Remove unused files
-- Review error logs
-- Test email delivery
-- Optimize database periodically
+---
+
+# Installation
+
+## Requirements
+
+- PHP 8+
+- MySQL
+- Apache
+- phpMyAdmin
+
+---
+
+## Installation Steps
+
+1. Clone or download the project.
+
+```
+git clone https://github.com/username/task-manager.git
+```
+
+2. Create a MySQL database.
+
+3. Import the SQL database.
+
+4. Configure the `.env` file.
+
+Example:
+
+```
+DB_HOST=localhost
+DB_NAME=task_manager
+DB_USER=root
+DB_PASSWORD=password
+```
+
+5. Start Apache and MySQL.
+
+6. Open the project in your browser.
+
+```
+http://localhost/task-manager
+```
+
+---
+
+# Email Configuration
+
+Configure SMTP inside your PHP mail configuration.
+
+Example:
+
+```
+SMTP Host
+SMTP Username
+SMTP Password
+SMTP Port
+```
+
+---
+
+# Testing
+
+Before deployment the following should be verified:
+
+- Login works correctly
+- CRUD operations work
+- Search functions correctly
+- Email notifications are sent
+- File uploads work
+- Calendar displays correctly
+- Delete confirmation appears
+- Responsive layout works
+- Keyboard navigation works
+- No console errors
+- No PHP warnings
+
+---
+
+# Deployment
+
+The application will be deployed using:
+
+- Bluehost File Manager
+- phpMyAdmin
+- Shared Hosting
+
+Deployment includes:
+
+- Upload project files
+- Import database
+- Configure `.env`
+- Configure SMTP
+- Test production environment
+
+---
+
+# Maintenance
+
+Future maintenance includes:
+
+- Bug fixes
+- Security updates
+- Regular backups
+- User management
+- Feature enhancements
+- Performance improvements
 
 ---
 
 # Future Enhancements
 
-- User authentication
-- Multiple users
-- Role-based permissions
-- Search
-- Calendar view
+Potential future features include:
+
 - Dark mode
-- Task reminders
-- Email templates
-- Activity logs
-- REST API
-- Mobile responsive improvements
+- Drag-and-drop Kanban board
+- Task comments
+- Activity log
+- Push notifications
+- Recurring tasks
+- Time tracking
+- Dashboard analytics
+- Mobile application
+- Two-factor authentication
 
 ---
 
-# Notes
+# Browser Support
 
-The current project already includes:
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+- Safari
 
-- PHP PDO database access
-- CRUD operations
-- File attachments
-- Email notifications
-- Status filtering
-- Priority management
-- Dashboard statistics
+---
 
-Recommended improvements mainly focus on production security, authentication, and scalability.
+# License
+
+This project is developed for internal business use. Redistribution or commercial use requires permission from the project owner.
+
+---
+
+# Developer
+
+Developed using:
+
+- HTML
+- CSS
+- JavaScript
+- PHP
+- MySQL
+
+---
+
+## Version
+
+**Version:** 1.0.0
+
+Initial Release
